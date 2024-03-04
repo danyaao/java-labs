@@ -37,15 +37,18 @@ public class LinkedList<T> {
      * @param initialData - accepts any data type
      */
     public LinkedList(T initialData) {
-        try {
-            head = new Node<>(initialData);
-            size = 1;
-        } catch (NullPointerException e) {
+        if (initialData == null) {
             throw new NullPointerException("Null value");
         }
-        ;
+        head = new Node<>(initialData);
+        size = 1;
     }
 
+    /**
+     * Returns an iterator over the elements in this list in proper sequence.
+     *
+     * @return an iterator over the elements in this list in proper sequence
+     */
     public Iterator<T> iterator() {
         return new LinkedListIterator();
     }
@@ -88,14 +91,13 @@ public class LinkedList<T> {
             head = new Node<>(t);
         }
         size += 1;
-
     }
 
     /**
      * Method to add value T at position index
      *
      * @param t     the element to add
-     * @param index where add element
+     * @param index where to add the element
      */
     public void add(T t, int index) {
         if (index > size - 1 || index < 0) {
@@ -119,7 +121,7 @@ public class LinkedList<T> {
     }
 
     /**
-     * Method to remove an element in the list
+     * Method to remove an element from the list
      *
      * @param index - the index of the element to remove
      */
@@ -146,12 +148,13 @@ public class LinkedList<T> {
      * Method to check if the list contains a specific element
      *
      * @param t - the element to search for
-     **/
+     * @return true if the element is present in the list, false otherwise
+     */
     public boolean contains(T t) {
         Node<T> h1 = head;
 
         do {
-            if (h1.data == t) {
+            if (h1.data.equals(t)) {
                 return true;
             }
             h1 = h1.next;
@@ -181,6 +184,8 @@ public class LinkedList<T> {
 
     /**
      * Method to show the current size of the list
+     *
+     * @return the size of the list
      */
     public int size() {
         return size;
@@ -188,6 +193,8 @@ public class LinkedList<T> {
 
     /**
      * Method to check if the list is empty
+     *
+     * @return true if the list is empty, false otherwise
      */
     public boolean isEmpty() {
         return head == null;
